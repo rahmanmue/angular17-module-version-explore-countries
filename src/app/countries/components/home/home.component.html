@@ -1,0 +1,55 @@
+<div class="container pt-2 pb-4">
+
+    <div class="row justify-content-center my-4">
+        <div class="col-lg-8 col-sm-10">
+            <div class="text-center mb-2">
+                <div class="position-relative title">
+                    <h3>Explore Countries</h3>
+                    <span class="position-absolute top-0 start-100 translate-start badge rounded-pill bg-danger">
+                      {{count}}
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </div>
+                <p class="text-secondary">Expand your knowledge by delving into geographical features of different countries.</p>
+                <div class="d-flex gap-2 justify-content-center mt-2 mb-3 flex-wrap">
+                    <div class="badge py-2 px-3" role="button" *ngFor="let reg of region; index as i" (click)="onClickRegion(reg.region)" [ngStyle]="{'background':reg.bgColor}">{{reg.name}}</div>
+                </div>
+            </div>
+        
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search Country..." [(ngModel)]="input_country" name="input_country"
+                (keyup.enter)="onClickSearch()"
+                >
+                <button class="input-group-text bg-info text-white" type="submit" (click)="onClickSearch()">Search</button>
+              </div>
+        </div>
+        <div class="col-lg-12 col-sm-12">
+            <div class="d-flex justify-content-center gap-2">
+                <span class="badge bg-success py-2" role="button" (click)="onClickAll()">
+                    All</span>
+                <span class="badge bg-info" role="button" (click)="onClickIndependent()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewBox="0 0 16 16">
+                        <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21 21 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21 21 0 0 0 14 7.655V1.222z"/>
+                    </svg>
+                    Independent</span>
+                <span class="badge bg-danger" role="button" (click)="onClickNotIndependent()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-flag" viewBox="0 0 16 16">
+                        <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21 21 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21 21 0 0 0 14 7.655V1.222z"/>
+                    </svg>
+                    Not Independent</span>
+            </div>
+        </div>
+
+     
+    </div>
+
+    <div class="row g-3">
+        <div class="col-lg-3 col-sm-12" *ngFor="let item of countries;">
+            <card [country]="item.name.common" [flag]="item.flag" [capital]="item.capital" [region]="item.region" [location]="item.maps.googleMaps" [independent]="item.independent" />
+        </div>
+    </div>
+</div>
+
+
+
+
