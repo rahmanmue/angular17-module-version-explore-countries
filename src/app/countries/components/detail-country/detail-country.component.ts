@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailCountryComponent {
   country:any;
+  isLoading = false;
 
   constructor(private countriesService: CountriesService, private route: ActivatedRoute){
     
@@ -22,11 +23,16 @@ export class DetailCountryComponent {
   }
 
   getCountriesByName(name:string){
+    this.isLoading = true;
     this.countriesService.getCountriesByDetailName(name).subscribe({
       next: (data:any) => {
         this.country = data[0] as any;
+        this.isLoading= false;
       },
-      error: err => console.log(err)
+      error: err => {
+        console.log(err)
+        this.isLoading= false;
+      }
     })
   }
 

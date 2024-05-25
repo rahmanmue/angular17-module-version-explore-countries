@@ -44,9 +44,17 @@
     </div>
 
     <div class="row g-3">
-        <div class="col-lg-3 col-sm-12" *ngFor="let item of countries;">
-            <card [country]="item.name.common" [flag]="item.flag" [capital]="item.capital" [region]="item.region" [location]="item.maps.googleMaps" [independent]="item.independent" />
-        </div>
+        @if(isLoading){
+            <div class="col-12 text-center">
+                <div class="spinner-grow text-warning" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        }@else {
+            <div class="col-lg-3 col-sm-12" *ngFor="let item of countries;">
+                <card [country]="item.name.common" [flag]="item.flag" [capital]="item.capital" [region]="item.region" [location]="item.maps.googleMaps" [independent]="item.independent" />
+            </div>
+        }
     </div>
 </div>
 

@@ -37,8 +37,9 @@ export class HomeComponent {
       bgColor: "#8B93FF"
     }
   ]
-
   count!:number;
+
+  isLoading:boolean = false;
 
   constructor(private countriesService: CountriesService){}
 
@@ -51,32 +52,47 @@ export class HomeComponent {
   }
 
   getAllCountries(){
+    this.isLoading = true;
     this.countriesService.getAllCountries().subscribe({
       next: data =>{
         this.countries = data as any[];
         this.temp_countries = data as any[];
         // console.log(data)
+        this.isLoading= false;
       },
-      error: err => console.log(err)
+      error: err => {
+        this.isLoading= false;
+        console.log(err)
+      }
     })
   }
 
   getAllCountriesByIndependent(status:string){
+    this.isLoading = true;
     this.countriesService.getAllCountriesByIndependent(status).subscribe({
       next: data =>{
         this.countries = data as any[];
+        this.isLoading= false;
       },
-      error: err => console.log(err)
+      error: err =>{
+        this.isLoading= false;
+        console.log(err)
+      } 
     })
   }
 
 
   getCountriesByName(name:string){
+    this.isLoading = true;
     this.countriesService.getCountriesByName(name).subscribe({
-      next: data => this.countries = data,
+      next: data => {
+        this.countries = data,
+        this.isLoading= false;
+      }, 
       error: err => {
         alert("Data Not Found")
         this.input_country= '';
+        this.isLoading= false;
       }
     })
   }
@@ -102,9 +118,16 @@ export class HomeComponent {
   }
 
   onClickRegion(region:string){
+    this.isLoading = true;
     this.countriesService.getCountriesByRegion(region).subscribe({
-      next: data => this.countries = data,
-      error : err => console.log(err)
+      next: data => {
+        this.countries = data;
+        this.isLoading= false;
+      },
+      error : err => {
+        this.isLoading= false;
+        console.log(err)
+      }
     })
   }
 
